@@ -4,15 +4,14 @@ using System.Linq;
 using System.Web;
 using FluentValidation;
 using FormularzZDataBase.Models;
-using FormularzZDataBase.Repository;
 
 namespace FormularzZDataBase.BusinessLogic
 {
-    public class PeopleValidator : AbstractValidator<People>
+    public class AddressValidator : AbstractValidator<Address>
     {
-        public PeopleValidator()
+        public AddressValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("Enter your Name");
+            RuleFor(x => x.PostCode).Matches("\\d\\d-\\d\\d\\d").WithMessage("Enter correct post code");
         }
     }
 }
