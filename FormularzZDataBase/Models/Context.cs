@@ -6,13 +6,15 @@ using System.Web;
 
 namespace FormularzZDataBase.Models
 {
-    public class AdressContext : DbContext
+    public class Context : DbContext
     {
-        public AdressContext() : base("Addressess")
+        public Context() : base("Addressess")
         {
        
         }
 
         public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<People> People { get; set; }
     }
 }

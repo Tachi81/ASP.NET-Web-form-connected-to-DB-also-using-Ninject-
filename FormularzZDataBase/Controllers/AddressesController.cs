@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FormularzZDataBase.BusinessLogic;
+using FormularzZDataBase.Interfaces;
 using FormularzZDataBase.Models;
 using FormularzZDataBase.Repository;
 
@@ -15,11 +16,13 @@ namespace FormularzZDataBase.Controllers
     public class AddressesController : Controller
     {
 
-        private readonly AddressRepository _addressRepository;
+        private readonly IAddressRepository _addressRepository;
+        private readonly IPeopleRepository _peopleRepository;
 
-        public AddressesController()
+        public AddressesController(IAddressRepository addressRepository, IPeopleRepository peopleRepository)
         {
-                _addressRepository = new AddressRepository();
+            _addressRepository = addressRepository;
+            _peopleRepository = peopleRepository;
         }
 
         // GET: Addresses
@@ -56,7 +59,7 @@ namespace FormularzZDataBase.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,PostCode,City,Street,BuildingNr")] Address address)
         {
-            var validator = new PostCodeValidator();
+            var validator = new AddressValidator();
             var result = validator.Validate(address);
             if (result.IsValid)
             {
