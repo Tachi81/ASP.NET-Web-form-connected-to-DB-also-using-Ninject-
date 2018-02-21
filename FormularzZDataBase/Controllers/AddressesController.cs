@@ -17,12 +17,12 @@ namespace FormularzZDataBase.Controllers
     {
 
         private readonly IAddressRepository _addressRepository;
-        private readonly IPeopleRepository _peopleRepository;
+        
 
-        public AddressesController(IAddressRepository addressRepository, IPeopleRepository peopleRepository)
+        public AddressesController(IAddressRepository addressRepository)
         {
             _addressRepository = addressRepository;
-            _peopleRepository = peopleRepository;
+            
         }
 
         // GET: Addresses

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FormularzZDataBase.BusinessLogic;
+using FormularzZDataBase.Interfaces;
 using FormularzZDataBase.Models;
 using FormularzZDataBase.Repository;
 
@@ -14,11 +15,11 @@ namespace FormularzZDataBase.Controllers
 {
     public class PeopleController : Controller
     {
-        private readonly PeopleRepository _peopleRepository;
+        private readonly IPeopleRepository _peopleRepository;
 
-        public PeopleController()
+        public PeopleController(IPeopleRepository peopleRepository)
         {
-            _peopleRepository = new PeopleRepository();
+            _peopleRepository = peopleRepository;
         }
 
         // GET: People
@@ -53,7 +54,7 @@ namespace FormularzZDataBase.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PostCode,City,Street,BuildingNr")] People man)
+        public ActionResult Create(People man)
         {
             var validator = new PeopleValidator();
             var result = validator.Validate(man);
@@ -93,7 +94,7 @@ namespace FormularzZDataBase.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PostCode,City,Street,BuildingNr")] People man)
+        public ActionResult Edit(People man)
         {
             if (ModelState.IsValid)
             {
