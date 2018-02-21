@@ -7,7 +7,7 @@ using FormularzZDataBase.Models;
 
 namespace FormularzZDataBase.Repository
 {
-    public class AddressRepository :  AbstractRepository<Address>
+    public class AddressRepository :  AbstractRepository<Address>, IAddressRepository
     {
     }
 }
